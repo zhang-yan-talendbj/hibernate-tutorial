@@ -1,0 +1,11 @@
+= HIBERNATE - Tutorial =
+
+http://docs.jboss.org/hibernate/core/3.3/reference/en/html/tutorial.html
+
+We will utilize the Maven exec plugin to launch the HSQLDB server by running:
+
+<pre>
+mvn compile
+mvn exec:java -Dexec.mainClass="org.hsqldb.Server" -Dexec.args="-database.0 file:target/data/tutorial"
+</pre>
+
