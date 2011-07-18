@@ -1,11 +1,26 @@
 = HIBERNATE - Tutorial =
 
+Experimenting with the following tutorial
 http://docs.jboss.org/hibernate/core/3.3/reference/en/html/tutorial.html
 
-We will utilize the Maven exec plugin to launch the HSQLDB server by running:
+With updates as suggested in the Hibernate Core Migration Guide: 3.6
+http://community.jboss.org/wiki/HibernateCoreMigrationGuide36
+
+To download dependencies and compile:
 
 <pre>
 mvn compile
+</pre>
+
+To launch the HSQLDB server:
+
+<pre>
 mvn exec:java -Dexec.mainClass="org.hsqldb.Server" -Dexec.args="-database.0 file:target/data/tutorial"
+</pre>
+
+Create a new entity and store it in the database:
+
+<pre>
+mvn -q exec:java -Dexec.mainClass=org.hibernate.tutorial.EventManager -Dexec.args=store
 </pre>
 
