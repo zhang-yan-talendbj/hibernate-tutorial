@@ -8,19 +8,17 @@ http://community.jboss.org/wiki/HibernateCoreMigrationGuide36
 
 To download dependencies and compile:
 
-<pre>
-mvn compile
-</pre>
+<pre>mvn compile</pre>
 
 To launch the HSQLDB server:
 
-<pre>
-mvn exec:java -Dexec.mainClass="org.hsqldb.Server" -Dexec.args="-database.0 file:target/data/tutorial"
-</pre>
+<pre>mvn exec:java -Dexec.mainClass="org.hsqldb.Server" -Dexec.args="-database.0 file:target/data/tutorial"</pre>
 
 To create a new entity and store it in the database:
 
-<pre>
-mvn -q exec:java -Dexec.mainClass=org.hibernate.tutorial.EventManager -Dexec.args=store
-</pre>
+<pre>mvn -q exec:java -Dexec.mainClass=org.hibernate.tutorial.EventManager -Dexec.args=store</pre>
+
+To list events in the DB:
+
+<pre>mvn -q exec:java -Dexec.mainClass=org.hibernate.tutorial.EventManager -Dexec.args=list</pre>
 
