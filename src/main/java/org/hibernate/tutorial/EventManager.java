@@ -32,6 +32,10 @@ public class EventManager {
             Long personId = mgr.createAndStoreNewPerson("First Name", "Last Name", 26);
             mgr.addPersonToEvent(personId, eventId);
             System.out.println("Added person " + personId + " to event " + eventId);
+        } else if (args[0].equals("addemailtoperson")) {
+            Long personId = mgr.createAndStoreNewPerson("First Name", "Last Name", 26);
+            mgr.addEmailToPerson(personId, "eamail@example.com");
+            mgr.addEmailToPerson(personId, "another@example.com");
         }
 
     }
@@ -88,12 +92,33 @@ public class EventManager {
         return id;
     }
 
+    /**
+     * Associate two entities
+     * 
+     * @param personId
+     * @param eventId
+     */
     private void addPersonToEvent(Long personId, Long eventId) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         Person aPerson = (Person) session.load(Person.class, personId);
         Event anEvent = (Event) session.load(Event.class, eventId);
         aPerson.getEvents().add(anEvent);
+        session.getTransaction().commit();
+    }
+
+    /**
+     * Demonstrates a multi-valued attribute
+     * 
+     * @param personId
+     * @param emailAddress
+     */
+    private void addEmailToPerson(Long personId, String emailAddress) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        Person aPerson = (Person) session.load(Person.class, personId);
+        //adding the emailAddress collection might trigger a lazy load of the collection
+        aPerson.getEmailAddresses().add(emailAddress);
         session.getTransaction().commit();
     }
 

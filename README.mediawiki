@@ -22,7 +22,10 @@ To list events in the DB:
 
 <pre>mvn -q exec:java -Dexec.mainClass=org.hibernate.tutorial.EventManager -Dexec.args=list</pre>
 
-To add a person to an event:
+To add a person to an event (association between two entities):
 
 <pre>mvn -q exec:java -Dexec.mainClass=org.hibernate.tutorial.EventManager -Dexec.args=addpersontoevent</pre>
 
+To add an email to a person (multi-valued attribute):
+
+<pre>mvn -q exec:java -Dexec.mainClass=org.hibernate.tutorial.EventManager -Dexec.args=addemailtoperson</pre>
