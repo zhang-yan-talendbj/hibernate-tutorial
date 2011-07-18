@@ -31,7 +31,7 @@ public class EventManager {
             Long eventId = mgr.createAndStoreNewEvent("My Event", new Date());
             Long personId = mgr.createAndStoreNewPerson("First Name", "Last Name", 26);
             mgr.addPersonToEvent(personId, eventId);
-            System.out("Added person " + personId + " to event " + eventId);
+            System.out.println("Added person " + personId + " to event " + eventId);
         }
 
     }
