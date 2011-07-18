@@ -1,9 +1,8 @@
 = HIBERNATE - Tutorial =
 
 Experimenting with the following tutorial
-http://docs.jboss.org/hibernate/core/3.3/reference/en/html/tutorial.html
-
-With updates as suggested in the Hibernate Core Migration Guide: 3.6
+http://docs.jboss.org/hibernate/core/3.3/reference/en/html/tutorial.html - 
+with updates as suggested in the Hibernate Core Migration Guide: 3.6
 http://community.jboss.org/wiki/HibernateCoreMigrationGuide36
 
 To download dependencies and compile:
