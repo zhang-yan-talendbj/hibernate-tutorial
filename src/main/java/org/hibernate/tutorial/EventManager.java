@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.tutorial.domain.Event;
+import org.hibernate.tutorial.domain.Person;
 import org.hibernate.tutorial.util.HibernateUtil;
 
 public class EventManager {
@@ -26,6 +27,11 @@ public class EventManager {
                 Event theEvent = events.get(i);
                 System.out.println("Event: " + theEvent.getTitle() + " Time: " + theEvent.getDate());
             }
+        } else if (args[0].equals("addpersontoevent")) {
+            Long eventId = mgr.createAndStoreNewEvent("My Event", new Date());
+            Long personId = mgr.createAndStoreNewPerson("First Name", "Last Name", 26);
+            mgr.addPersonToEvent(personId, eventId);
+            System.out("Added person " + personId + " to event " + eventId);
         }
 
     }
@@ -39,13 +45,55 @@ public class EventManager {
         return result;
     }
 
-    private void createAndStoreNewEvent(String title, Date theDate) {
+    /**
+     * Create a new event and store it in the DB
+     * 
+     * @param title
+     *            event title
+     * @param theDate
+     *            event date
+     * @return the generated id
+     */
+    private Long createAndStoreNewEvent(String title, Date theDate) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         Event theEvent = new Event();
         theEvent.setTitle(title);
         theEvent.setDate(theDate);
-        session.save(theEvent);
+        Long id = (Long) session.save(theEvent);
+        session.getTransaction().commit();
+        return id;
+    }
+
+    /**
+     * Create a new person and store it in the DB
+     * 
+     * @param firstname
+     *            first name of the person
+     * @param lastname
+     *            last name of the person
+     * @param age
+     *            age at the moment of person creation
+     * @return the generated id
+     */
+    private Long createAndStoreNewPerson(String firstname, String lastname, int age) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        Person thePerson = new Person();
+        thePerson.setFirstname(firstname);
+        thePerson.setLastname(lastname);
+        thePerson.setAge(age);
+        Long id = (Long) session.save(thePerson);
+        session.getTransaction().commit();
+        return id;
+    }
+
+    private void addPersonToEvent(Long personId, Long eventId) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        Person aPerson = (Person) session.load(Person.class, personId);
+        Event anEvent = (Event) session.load(Event.class, eventId);
+        aPerson.getEvents().add(anEvent);
         session.getTransaction().commit();
     }
 
