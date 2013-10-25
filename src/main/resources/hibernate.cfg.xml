@@ -7,17 +7,18 @@
     
     <session-factory>
         
-        <!-- Database connection settings -->
+        <!-- Database connection settings 
         <property name="connection.driver_class">org.hsqldb.jdbcDriver</property>
         <property name="connection.url">jdbc:hsqldb:hsql://localhost</property>
         <property name="connection.username">sa</property>
         <property name="connection.password"></property>
+        <property name="dialect">org.hibernate.dialect.HSQLDialect</property>
+        -->
         
         <!-- JDBC connection pool (use the built-in) -->
         <property name="connection.pool_size">3</property>
         
         <!-- SQL dialect -->
-        <property name="dialect">org.hibernate.dialect.HSQLDialect</property>
         
         <!-- Enable Hibernate's automatic session context management -->
         <property name="current_session_context_class">thread</property>
